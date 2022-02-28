@@ -1,0 +1,66 @@
+{
+	"name": "sfdx-apex-typings-generator",
+	"description": "Unofficial rich apex typings generator",
+	"version": "0.0.0",
+	"author": "Ziemniakoss",
+	"bugs": "https://github.com/ziemniakoss/apex-typings-generator/issues",
+	"dependencies": {
+		"@oclif/command": "^1",
+		"@oclif/config": "^1",
+		"@oclif/errors": "^1",
+		"@salesforce/command": "^3",
+		"@salesforce/core": "^2",
+		"tslib": "^2"
+	},
+	"devDependencies": {
+		"@oclif/dev-cli": "^1",
+		"@oclif/plugin-help": "^3",
+		"@oclif/test": "^1",
+		"@salesforce/dev-config": "^2",
+		"@salesforce/dev-scripts": "^0",
+		"@salesforce/prettier-config": "^0",
+		"@salesforce/ts-sinon": "^1",
+		"@types/chai": "^4",
+		"@types/jsforce": "^1.9.29",
+		"@types/mocha": "^8",
+		"chai": "^4",
+		"globby": "^11",
+		"husky": "^4",
+		"mocha": "^8",
+		"nyc": "^15",
+		"prettier": "^2",
+		"pretty-quick": "^3",
+		"sinon": "10.0.0",
+		"ts-node": "^10",
+		"typescript": "4"
+	},
+	"engines": {
+		"node": ">=12.0.0"
+	},
+	"files": [
+		"/lib",
+		"/messages",
+		"/npm-shrinkwrap.json",
+		"/oclif.manifest.json"
+	],
+	"homepage": "https://github.com/ziemniakoss/sfdx-apex-typings-generator",
+	"keywords": [
+		"sfdx-plugin",
+		"apex",
+		"language-server"
+	],
+	"license": "MIT",
+	"oclif": {
+		"commands": "./lib/commands",
+		"bin": "sfdx",
+		"devPlugins": [
+			"@oclif/plugin-help"
+		]
+	},
+	"repository": "ziemniakoss/apex-typings-generator",
+	"scripts": {
+		"build": "tsc -p .",
+		"postpack": "rm -f oclif.manifest.json",
+		"prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme"
+	}
+}
