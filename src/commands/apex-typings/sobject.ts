@@ -182,6 +182,9 @@ export default class GenerateSObjectTypings extends SfdxCommand {
 			subfolderName,
 			fileName
 		);
+		if(existsSync(filePath)) {
+			await promises.rm(filePath)
+		}
 		return promises.writeFile(filePath, classContent + "}\n");
 	}
 
