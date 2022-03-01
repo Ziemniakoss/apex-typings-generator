@@ -1,7 +1,6 @@
 import { SfdxCommand, flags } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
-import { readdir, readFile, writeFile } from "fs/promises";
-import { lstatSync } from "fs";
+import { lstatSync, promises } from "fs";
 import { join } from "path";
 import { parseStringPromise } from "xml2js";
 
@@ -32,7 +31,7 @@ export default class GenerateLabelsTypings extends SfdxCommand {
 			.then(this.collectUniqueLabels);
 		const labelsApexClass = this.generateApexClassForLabels(customLabels);
 		if (this.flags.out != null) {
-			await writeFile(this.flags.out, labelsApexClass);
+			await promises.writeFile(this.flags.out, labelsApexClass);
 		} else {
 			this.ux.log(labelsApexClass);
 		}
@@ -80,7 +79,8 @@ export default class GenerateLabelsTypings extends SfdxCommand {
 	private async collectLabelsFromFile(
 		fileName: string
 	): Promise<CustomLabel[]> {
-		return readFile(fileName, "utf-8")
+		return promises
+			.readFile(fileName, "utf-8")
 			.then(parseStringPromise)
 			.then((parsedLabels) => {
 				// @ts-ignore
@@ -114,9 +114,13 @@ export default class GenerateLabelsTypings extends SfdxCommand {
 		if (baseDir == null) {
 			baseDir = this.project.getPath();
 		}
-		const filesOrDirs = await readdir(baseDir).then((fileOrDirNames) =>
-			fileOrDirNames.map((fileOrDirName) => join(baseDir, fileOrDirName))
-		);
+		const filesOrDirs = await promises
+			.readdir(baseDir)
+			.then((fileOrDirNames) =>
+				fileOrDirNames.map((fileOrDirName) =>
+					join(baseDir, fileOrDirName)
+				)
+			);
 
 		const dirs = filesOrDirs.filter((fileOrDir) =>
 			lstatSync(fileOrDir).isDirectory()
