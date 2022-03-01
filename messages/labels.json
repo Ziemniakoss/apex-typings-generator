@@ -1,0 +1,5 @@
+{
+	"description": "Generate apex class representing System.Label\nGenerate apex class representing System.Label. Due to limitations of metadata api (labels can't be fetched with jsforce) labels will be generated only for locally stored labels.\n\nHow to use?\n\n1. Generate typings file.\nUse\n\tsfdx apex-typings:labels -o pathToDIr\ncommand to generate typing. It is recommended to name file 'Label.cls'. Specified file must be in one of folders mentioned in sfdx-project.json file (otherwise apex language server wont see it)\n\n2. Add generated file to .forceignore  to avoid deployment problems\n\n3. Use new typings by referencing Label class(Without System namespace)!\nTrigger.new[0].addError(Label.nameOfLabelWithError);",
+	"flag:out": "File to which typings should be printed out. by default typings will be printed to standard output",
+	"flag:packages": "Packages"
+}

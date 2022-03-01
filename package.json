@@ -10,7 +10,8 @@
 		"@oclif/errors": "^1",
 		"@salesforce/command": "^3",
 		"@salesforce/core": "^2",
-		"tslib": "^2"
+		"tslib": "^2",
+		"xml2js": "^0.4.23"
 	},
 	"devDependencies": {
 		"@oclif/dev-cli": "^1",
@@ -55,7 +56,12 @@
 		"bin": "sfdx",
 		"devPlugins": [
 			"@oclif/plugin-help"
-		]
+		],
+		"topics": {
+			"apex-typings": {
+				"description": "Generate custom typings for apex language server"
+			}
+		}
 	},
 	"repository": "ziemniakoss/apex-typings-generator",
 	"scripts": {
