@@ -36,7 +36,7 @@ export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 	public async run(): Promise<unknown> {
 		this.ux.startSpinner(messages.getMessage("starting_message"));
 		const namespaces = await this.getNamespaces();
-		console.log(namespaces);
+
 		for (const namespace of namespaces) {
 			await this.generateTypingsForNamespace(
 				namespace,
