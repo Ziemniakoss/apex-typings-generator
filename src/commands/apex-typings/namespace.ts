@@ -51,7 +51,7 @@ export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 		this.ux.setSpinnerStatus(messages.getMessage("fetching_namespaces"));
 		return this.org
 			.getConnection()
-			.query(
+			.queryAll(
 				"SELECT NamespacePrefix FROM ApexClass WHERE NamespacePrefix != null  GROUP BY NamespacePrefix"
 			)
 			.then((result) => result.records)
