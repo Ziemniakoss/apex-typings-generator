@@ -1,7 +1,7 @@
 {
 	"name": "sfdx-apex-typings-generator",
 	"description": "Unofficial rich apex typings generator",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"author": "Ziemniakoss",
 	"bugs": "https://github.com/ziemniakoss/apex-typings-generator/issues",
 	"dependencies": {
