@@ -84,7 +84,7 @@ export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 		);
 		return this.org
 			.getConnection()
-			.query(
+			.autoFetchQuery(
 				`SELECT NamespacePrefix, Body, Name FROM ApexClass WHERE NamespacePrefix = '${namespace}'`
 			)
 			.then((result) => {
