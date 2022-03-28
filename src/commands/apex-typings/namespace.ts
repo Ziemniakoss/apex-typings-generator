@@ -2,6 +2,7 @@ import { SfdxCommand, flags } from "@salesforce/command";
 import { Messages } from "@salesforce/core";
 import { promises } from "fs";
 import { join } from "path";
+import {reset} from "sinon";
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages(
@@ -9,6 +10,7 @@ const messages = Messages.loadMessages(
 	"package"
 );
 
+const BATCH_SIZE = 200;
 export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 	protected static requiresUsername = true;
 	protected static requiresProject = true;
@@ -34,7 +36,6 @@ export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 	};
 
 	public async run(): Promise<unknown> {
-		this.ux.startSpinner(messages.getMessage("starting_message"));
 		const namespaces = await this.getNamespaces();
 
 		for (const namespace of namespaces) {
@@ -51,8 +52,8 @@ export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 		this.ux.setSpinnerStatus(messages.getMessage("fetching_namespaces"));
 		return this.org
 			.getConnection()
-			.queryAll(
-				"SELECT NamespacePrefix FROM ApexClass WHERE NamespacePrefix != null  GROUP BY NamespacePrefix"
+			.autoFetchQuery(
+				"SELECT NamespacePrefix FROM ApexClass WHERE NamespacePrefix != null  GROUP BY NamespacePrefix", {}
 			)
 			.then((result) => result.records)
 			.then((records) => {
@@ -83,6 +84,12 @@ export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 				.getMessage("generating_typings_message")
 				.replace("{package}", namespace)
 		);
+		const count = await this.org
+			.getConnection()
+			.query(`SELECT COUNT() FROM ApexClass WHERE NamespacePrefix = '${namespace}'`)
+			.then(result => {
+				return result.totalSize
+			})
 		return this.org
 			.getConnection()
 			.query(
