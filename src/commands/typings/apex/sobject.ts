@@ -1,9 +1,9 @@
 import { SfdxCommand, flags } from "@salesforce/command";
 import { DescribeSObjectResult } from "jsforce";
-import FieldDocsFactory from "../../FieldDocsFactory";
+import FieldDocsFactory from "../../../FieldDocsFactory";
 import { join } from "path";
 import { existsSync, promises } from "fs";
-import BaseSObjectDocsGenerator from "../../sObjectsDocsGenerator/BaseSObjectDocsGenerator";
+import BaseSObjectDocsGenerator from "../../../sObjectsDocsGenerator/BaseSObjectDocsGenerator";
 
 export default class GenerateSObjectTypings extends SfdxCommand {
 	protected static requiresUsername = true;
