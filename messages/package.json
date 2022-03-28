@@ -1,0 +1,13 @@
+{
+	"description": "Generate typings for namespace",
+	"flag_output_folder": "Folder to which typings should be written",
+	"flag_namespace": "Classes namespace to generate, for example sbqq",
+	"starting_message": "Generating apex typings",
+	"done_message": "Enjoy!",
+	"fetching_namespaces": "fetching namespaces with at least one global class",
+	"generating_typings_message": "generating typings for package {package}",
+	"package_without_classes": "Namespace {package} does not have any classes",
+	"example_fetch_all_namespaces": "#Fetch all namespaces\nsfdx apex-typings:namespace -o force-app/main/default/classes/.typings",
+	"example_fetch_for_one_namespace": "#Fetch typings for namespace\nsfdx apex-typings:namespace -o classes/.typings -n sbqq",
+	"example_fetch_multiple": "#Fetch multiple namespaces\nsfdx apex-typings:namespace -o .typings, -n sbqq,blng"
+}
