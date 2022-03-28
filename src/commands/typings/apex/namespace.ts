@@ -35,7 +35,7 @@ export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 
 	public async run(): Promise<unknown> {
 		const namespaces = await this.getNamespaces();
-
+		this.ux.startSpinner(messages.getMessage("starting_message"));
 		for (const namespace of namespaces) {
 			await this.generateTypingsForNamespace(
 				namespace,
@@ -51,7 +51,8 @@ export default class GenerateSObjectTypingsForNamespace extends SfdxCommand {
 		return this.org
 			.getConnection()
 			.autoFetchQuery(
-				"SELECT NamespacePrefix FROM ApexClass WHERE NamespacePrefix != null  GROUP BY NamespacePrefix", {}
+				"SELECT NamespacePrefix FROM ApexClass WHERE NamespacePrefix != null  GROUP BY NamespacePrefix",
+				{}
 			)
 			.then((result) => result.records)
 			.then((records) => {

@@ -7,7 +7,7 @@
 	"fetching_namespaces": "fetching namespaces with at least one global class",
 	"generating_typings_message": "generating typings for package {package}",
 	"package_without_classes": "Namespace {package} does not have any classes",
-	"example_fetch_all_namespaces": "#Fetch all namespaces\nsfdx apex-typings:namespace -o force-app/main/default/classes/.typings",
-	"example_fetch_for_one_namespace": "#Fetch typings for namespace\nsfdx apex-typings:namespace -o classes/.typings -n sbqq",
-	"example_fetch_multiple": "#Fetch multiple namespaces\nsfdx apex-typings:namespace -o .typings, -n sbqq,blng"
+	"example_fetch_all_namespaces": "#Fetch all namespaces\nsfdx typings:apex:namespace -o force-app/main/default/classes/.typings",
+	"example_fetch_for_one_namespace": "#Fetch typings for namespace\nsfdx typings:apex:namespace -o classes/.typings -n sbqq",
+	"example_fetch_multiple": "#Fetch multiple namespaces\nsfdx typings:apex:namespace -o .typings, -n sbqq,blng"
 }
